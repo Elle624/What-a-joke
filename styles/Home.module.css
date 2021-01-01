@@ -76,6 +76,9 @@
   cursor: pointer;
   animation: button-animation-rev 0.65s ease-out forwards;
   box-shadow: 3px 2px 10px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 0.2em;
+  width: 14em;
+  text-align: center;
   transition: 0.5s;
 }
 
