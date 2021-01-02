@@ -1,6 +1,6 @@
 .jokeContainer {
   margin-top: 2em;
-  padding: 2em;
+  padding: 2em 10em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,4 +21,24 @@
 .nav button:hover {
   cursor: pointer;
   box-shadow: 3px 2px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+.displayFavJokes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 5em;
+}
+
+.favJokeCard {
+  padding: 0 1em;
+  width: 20em;
+  height: 14em;
+  margin: 1em;
+  background-color: rgba(219, 219, 208, 0.4);
+  box-shadow: 3px 2px 10px 1px rgba(145, 144, 144, 0.15);
+}
+
+.favJokeCard p {
+  font-size: 1.1em;
 }
