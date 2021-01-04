@@ -1,36 +1,38 @@
-//import useSWR, { mutate } from 'swr';
 import React, { useState, useEffect } from 'react';
+import { apiCalls } from '../../../apiCalls';
 import styles from './Jokes.module.css';
 
 const DisplayJokes = () => {
-  let [randomJoke, setRandomJoke] = useState('');
   let [favJokes, setFavJokes] = useState([]);
-  // const { data, error } = useSWR('http://api.icndb.com/jokes/random/');
+  let [randomJoke, setRandomJoke] = useState('');
+  let [error, setError] = useState('');
+
   const getRandomJoke = () => {
-    return fetch('http://api.icndb.com/jokes/random')
-      .then((res) => res.json())
-      .then((data) => setRandomJoke(data.value));
+    apiCalls
+      .fetchRadomJoke()
+      .then((data) => setRandomJoke(data.value))
+      .catch((err) => setError(err.message));
   };
 
-  useEffect(() => getRandomJoke(), []);
-
   const addFavoriteJoke = (id) => {
-    fetch(`http://api.icndb.com/jokes/${id}`)
-      .then((res) => res.json())
+    apiCalls
+      .fetchFavoriteJoke(id)
       .then((data) => {
         if (!favJokes.find((jokeDeets) => jokeDeets.joke === data.value.joke)) {
           const updateFavJokesList = [...favJokes, data.value];
           setFavJokes(updateFavJokesList);
         }
-      });
+      })
+      .catch((err) => setError(err.message));
   };
+
+  useEffect(() => getRandomJoke(), []);
 
   return (
     <>
       <section className={styles.jokeContainer}>
-        {/* {error && <p>failed to get you a laugh, please try again!</p>}
-        <p>{data ? data.value.joke : 'Loading...'}</p> */}
-        <p>{randomJoke.joke}</p>
+        {error && <p>failed to get you a laugh, please try again!</p>}
+        <p>{randomJoke ? randomJoke.joke : 'Loading...'}</p>
         <section className={styles.nav}>
           <button onClick={getRandomJoke}>🤦‍♀️❌</button>
           <button onClick={() => addFavoriteJoke(randomJoke.id)}>😹🉑</button>
