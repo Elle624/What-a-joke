@@ -6,6 +6,7 @@ const Home = () => {
   return (
     <section className={styles.container}>
       <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
         <title>What A Joke</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
